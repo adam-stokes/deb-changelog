@@ -1,0 +1,24 @@
+{
+  "name": "deb-changelog",
+  "version": "1.0.0",
+  "description": "work with debian changelog files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/battlemidget/deb-changelog.git"
+  },
+  "author": "adam stokes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/battlemidget/deb-changelog/issues"
+  },
+  "homepage": "https://github.com/battlemidget/deb-changelog#readme",
+  "dependencies": {
+    "bluebird": "^2.9.32",
+    "lodash": "^3.10.0",
+    "xregexp": "^2.0.0"
+  }
+}
