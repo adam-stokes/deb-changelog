@@ -18,18 +18,24 @@ class ChangeLog
       '\\s' +
       '(?<series>\\w+);\\surgency=(?<priority>\\w+)' +
       '\\s+\\*\\s(?<body>.*)' +
-      '\\s*--\\s(?<ts>.*)', 'img')
+      '\\s*--\\s(?<firstname>\\w+)' +
+      '\\s' +
+      '(?<lastname>\\w+)' +
+      '\\s' +
+      '(?<email><.*>)' +
+      '\\s+' +
+      '(?<timestamp>.*)$', 'img')
 
     matches = []
-    xre.forEach @blob, entryRe, (matchVer, i) ->
+    xre.forEach @blob, entryRe, (match, i) ->
       model =
-        pkgname: matchVer.pkgname
-        major: parseInt(matchVer.major, 10)
-        minor: parseInt(matchVer.minor, 10)
-        patchLevel: parseInt(matchVer.patchLevel, 10) or undefined
-        versionExtra: matchVer.versionExtra
-        series: matchVer.series
-        priority: matchVer.priority
+        pkgname: match.pkgname
+        major: parseInt(match.major, 10)
+        minor: parseInt(match.minor, 10)
+        patchLevel: parseInt(match.patchLevel, 10) or undefined
+        versionExtra: match.versionExtra
+        series: match.series
+        priority: match.priority
       model.debVersion = "#{model.major}.#{model.minor}"
       if model.patchLevel?
         model.debVersion = "#{model.debVersion}.#{model.patchLevel}"
@@ -37,8 +43,11 @@ class ChangeLog
       if xre.exec("#{model.major}.#{model.minor}.#{model.patchLevel}",
         /^(\d+\.\d+\.\d+)/)
         model.semVer = true
-      model.body = matchVer.body
-      model.timestamp = matchVer.ts
+      model.body = match.body
+      model.firstname = match.firstname
+      model.lastname = match.lastname
+      model.email = match.email
+      model.timestamp = match.timestamp
       matches.push model
     return Promise.all(matches)
 
