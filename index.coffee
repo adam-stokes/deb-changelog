@@ -40,8 +40,7 @@ class ChangeLog
       if model.patchLevel?
         model.debVersion = "#{model.debVersion}.#{model.patchLevel}"
       model.semVer = false
-      if xre.exec("#{model.major}.#{model.minor}.#{model.patchLevel}",
-        /^(\d+\.\d+\.\d+)/)
+      if model.major? and model.minor? and model.patchLevel?
         model.semVer = true
       model.body = match.body
       model.firstname = match.firstname
