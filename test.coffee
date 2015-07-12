@@ -58,11 +58,19 @@ macumba (0.1-0ubuntu1) utopic; urgency=low
 #     console.log e
 #     return process.exit 1)
 
-svl = new ChangeLog(nonSemVerChange.split('\n'))
+svl = new ChangeLog(nonSemVerChange)
 svl.parse()
-  .then((logs) ->
-    for log in logs
-      console.log log
+  .then((out) ->
+    console.log out
+    return)
+  .catch((e) ->
+    console.log "Error: #{e}"
+    return process.exit 1)
+
+svl = new ChangeLog(properChange)
+svl.parse()
+  .then((out) ->
+    console.log out
     return)
   .catch((e) ->
     console.log "Error: #{e}"
