@@ -1,6 +1,6 @@
 {
   "name": "deb-changelog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "work with debian changelog files",
   "main": "index.js",
   "scripts": {

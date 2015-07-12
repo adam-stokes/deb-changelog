@@ -1,4 +1,3 @@
-Promise = require('bluebird')
 xre = require('xregexp').XRegExp
 
 class ChangeLog
@@ -48,6 +47,6 @@ class ChangeLog
       model.email = match.email
       model.timestamp = match.timestamp
       matches.push model
-    return Promise.all(matches)
+    return matches
 
 module.exports = ChangeLog

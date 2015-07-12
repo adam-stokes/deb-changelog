@@ -1,6 +1,6 @@
 Promise = require('bluebird')
 _ = require('lodash')
-ChangeLog = require('.')
+ChangeLog = Promise.promisifyAll(require('.'))
 
 properChange = """
 openstack (0.99.18-0ubuntu1~14.04.1~bleed1) trusty; urgency=medium
