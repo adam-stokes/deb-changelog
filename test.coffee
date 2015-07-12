@@ -1,4 +1,5 @@
 Promise = require('bluebird')
+_ = require('lodash')
 ChangeLog = require('.')
 
 properChange = """
@@ -48,30 +49,20 @@ macumba (0.1-0ubuntu1) utopic; urgency=low
 
 """
 
-# cl = new ChangeLog(properChange.split('\n'))
-# cl.parse()
-#   .then((logs) ->
-#     for log in logs
-#       console.log log.name()
+# svl = new ChangeLog(nonSemVerChange)
+# svl.parse()
+#   .then((out) ->
+#     console.log out
 #     return)
 #   .catch((e) ->
-#     console.log e
+#     console.log "Error: #{e}"
 #     return process.exit 1)
 
 svl = new ChangeLog(nonSemVerChange)
 svl.parse()
   .then((out) ->
-    console.log out
+    console.log _.first(out)
     return)
   .catch((e) ->
-    console.log "Error: #{e}"
-    return process.exit 1)
-
-svl = new ChangeLog(properChange)
-svl.parse()
-  .then((out) ->
-    console.log out
-    return)
-  .catch((e) ->
-    console.log "Error: #{e}"
+    console.log e
     return process.exit 1)
