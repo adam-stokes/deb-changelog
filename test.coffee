@@ -12,6 +12,7 @@ openstack (0.99.18-0ubuntu1~14.04.1~bleed1) trusty; urgency=medium
 openstack (0.99.17-0ubuntu1~15.10.1~bleed1) wily; urgency=medium
 
   * Fix typo in deploy command
+  * Upgrade juju compat
 
  -- Adam Stokes <adam.stokes@ubuntu.com>  Fri, 19 Jun 2015 17:01:14 -0400
  """
@@ -20,6 +21,8 @@ nonSemVerChange = """
 macumba (0.6-0ubuntu1) trusty; urgency=medium
 
   * Fix threaded execution
+  * More fixes
+  * Tartar sauce
 
  -- Adam Stokes <adam.stokes@ubuntu.com>  Thu, 14 May 2015 08:43:11 -0400
 
@@ -49,20 +52,25 @@ macumba (0.1-0ubuntu1) utopic; urgency=low
 
 """
 
-# svl = new ChangeLog(nonSemVerChange)
-# svl.parse()
-#   .then((out) ->
-#     console.log out
-#     return)
-#   .catch((e) ->
-#     console.log "Error: #{e}"
-#     return process.exit 1)
+logMultipleBody = """
+macumba (0.6-0ubuntu1) trusty; urgency=medium
+
+  * Fix threaded execution
+  * More fixes
+    Spans additional line
+  * Tartar sauce
+
+ -- Adam Stokes <adam.stokes@ubuntu.com>  Thu, 14 May 2015 08:43:11 -0400
+"""
+
+svl = new ChangeLog(properChange)
+logs = svl.splitLogs()
+for log in logs
+  model = svl.parse(log)
+  console.log model.pkgname
 
 svl = new ChangeLog(nonSemVerChange)
-svl.parse()
-  .then((out) ->
-    console.log _.first(out)
-    return)
-  .catch((e) ->
-    console.log e
-    return process.exit 1)
+logs = svl.splitLogs()
+for log in logs
+  model = svl.parse(log)
+  console.log model.pkgname
