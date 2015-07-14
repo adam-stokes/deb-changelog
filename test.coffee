@@ -1,5 +1,6 @@
 Promise = require('bluebird')
 _ = require('lodash')
+semver = require('semver')
 ChangeLog = require('.')
 
 properChange = """
@@ -65,9 +66,10 @@ macumba (0.6-0ubuntu1) trusty; urgency=medium
 
 svl = new ChangeLog(properChange)
 logs = svl.splitLogs()
-for log in logs
-  console.log "\n\nInput:"
-  console.log log
-  console.log "Result:"
-  model = svl.parse(log)
-  console.log model
+log = _.first(logs)
+console.log "\n\nInput:"
+console.log log
+console.log "Result:"
+model = svl.parse(log)
+console.log model
+console.log semver.inc(model.version, 'prepatch')

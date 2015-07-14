@@ -28,12 +28,8 @@ class ChangeLog
       '^(?<pkgname>\\w+)' +
       '\\s' +
       '\\(' +
-      '(?<major>\\d+)' +
-      '\\.' +
-      '(?<minor>\\d+)' +
-      '\\.?' +
-      '(?<patchLevel>\\d+)?-' +
-      '(?<versionExtra>\\d+.*)\\)' +
+      '(?<version>\\d+\\.\\d+\\.?\\d+?-\\d+)' +
+      '(?<versionExtra>.*)\\)' +
       '\\s' +
       '(?<series>\\w+);\\surgency=(?<priority>\\w+)' +
       '\\s[^]*' +
@@ -51,6 +47,7 @@ class ChangeLog
       major: parseInt(match.major, 10)
       minor: parseInt(match.minor, 10)
       patchLevel: parseInt(match.patchLevel, 10) or undefined
+      version: match.version
       versionExtra: match.versionExtra
       series: match.series
       priority: match.priority
@@ -58,10 +55,6 @@ class ChangeLog
       lastname: match.lastname
       email: match.email
       timestamp: match.timestamp
-      debVersion: "#{match.major}.#{match.minor}"
-    if match.patchLevel?
-      model.debVersion = "#{model.debVersion}.#{match.patchLevel}"
-    model.semVer = semver.valid(model.debVersion)
     model.body = @parseBody(stanza)
     return model
 

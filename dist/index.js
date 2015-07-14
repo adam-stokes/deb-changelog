@@ -36,26 +36,22 @@ ChangeLog = (function() {
 
   ChangeLog.prototype.parse = function(stanza) {
     var entryRe, match, model;
-    entryRe = xre('^(?<pkgname>\\w+)' + '\\s' + '\\(' + '(?<major>\\d+)' + '\\.' + '(?<minor>\\d+)' + '\\.?' + '(?<patchLevel>\\d+)?-' + '(?<versionExtra>\\d+.*)\\)' + '\\s' + '(?<series>\\w+);\\surgency=(?<priority>\\w+)' + '\\s[^]*' + '--\\s(?<firstname>\\w+)' + '\\s' + '(?<lastname>\\w+)' + '\\s' + '(?<email><.*>)' + '\\s+' + '(?<timestamp>.*)', 'img');
+    entryRe = xre('^(?<pkgname>\\w+)' + '\\s' + '\\(' + '(?<version>\\d+\\.\\d+\\.?\\d+?-\\d+)' + '(?<versionExtra>.*)\\)' + '\\s' + '(?<series>\\w+);\\surgency=(?<priority>\\w+)' + '\\s[^]*' + '--\\s(?<firstname>\\w+)' + '\\s' + '(?<lastname>\\w+)' + '\\s' + '(?<email><.*>)' + '\\s+' + '(?<timestamp>.*)', 'img');
     match = xre.exec(stanza, entryRe);
     model = {
       pkgname: match.pkgname,
       major: parseInt(match.major, 10),
       minor: parseInt(match.minor, 10),
       patchLevel: parseInt(match.patchLevel, 10) || void 0,
+      version: match.version,
       versionExtra: match.versionExtra,
       series: match.series,
       priority: match.priority,
       firstname: match.firstname,
       lastname: match.lastname,
       email: match.email,
-      timestamp: match.timestamp,
-      debVersion: match.major + "." + match.minor
+      timestamp: match.timestamp
     };
-    if (match.patchLevel != null) {
-      model.debVersion = model.debVersion + "." + match.patchLevel;
-    }
-    model.semVer = semver.valid(model.debVersion);
     model.body = this.parseBody(stanza);
     return model;
   };
