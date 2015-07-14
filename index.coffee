@@ -28,7 +28,7 @@ class ChangeLog
       '^(?<pkgname>\\w+)' +
       '\\s' +
       '\\(' +
-      '(?<version>\\d+\\.\\d+\\.?\\d+?-\\d+)' +
+      '(?<version>\\d+\\.\\d+\\.*\\d*-\\d+)' +
       '(?<versionExtra>.*)\\)' +
       '\\s' +
       '(?<series>\\w+);\\surgency=(?<priority>\\w+)' +
@@ -44,9 +44,6 @@ class ChangeLog
     match = xre.exec(stanza, entryRe)
     model =
       pkgname: match.pkgname
-      major: parseInt(match.major, 10)
-      minor: parseInt(match.minor, 10)
-      patchLevel: parseInt(match.patchLevel, 10) or undefined
       version: match.version
       versionExtra: match.versionExtra
       series: match.series

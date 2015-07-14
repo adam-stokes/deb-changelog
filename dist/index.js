@@ -36,13 +36,10 @@ ChangeLog = (function() {
 
   ChangeLog.prototype.parse = function(stanza) {
     var entryRe, match, model;
-    entryRe = xre('^(?<pkgname>\\w+)' + '\\s' + '\\(' + '(?<version>\\d+\\.\\d+\\.?\\d+?-\\d+)' + '(?<versionExtra>.*)\\)' + '\\s' + '(?<series>\\w+);\\surgency=(?<priority>\\w+)' + '\\s[^]*' + '--\\s(?<firstname>\\w+)' + '\\s' + '(?<lastname>\\w+)' + '\\s' + '(?<email><.*>)' + '\\s+' + '(?<timestamp>.*)', 'img');
+    entryRe = xre('^(?<pkgname>\\w+)' + '\\s' + '\\(' + '(?<version>\\d+\\.\\d+\\.*\\d*-\\d+)' + '(?<versionExtra>.*)\\)' + '\\s' + '(?<series>\\w+);\\surgency=(?<priority>\\w+)' + '\\s[^]*' + '--\\s(?<firstname>\\w+)' + '\\s' + '(?<lastname>\\w+)' + '\\s' + '(?<email><.*>)' + '\\s+' + '(?<timestamp>.*)', 'img');
     match = xre.exec(stanza, entryRe);
     model = {
       pkgname: match.pkgname,
-      major: parseInt(match.major, 10),
-      minor: parseInt(match.minor, 10),
-      patchLevel: parseInt(match.patchLevel, 10) || void 0,
       version: match.version,
       versionExtra: match.versionExtra,
       series: match.series,
