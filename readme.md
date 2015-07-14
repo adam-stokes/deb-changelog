@@ -3,7 +3,7 @@ deb-changelog - parse `debian/changelog`
 ## Install
 
 ```
-$ npm i --save battlemidget/deb-changelog
+$ npm i --save deb-changelog
 ```
 
 ## Usage
