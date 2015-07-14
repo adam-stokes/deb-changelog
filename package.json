@@ -1,8 +1,8 @@
 {
   "name": "deb-changelog",
-  "version": "1.0.1",
-  "description": "work with debian changelog files",
-  "main": "index.js",
+  "version": "1.0.0",
+  "description": "parse debian/changelog",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +19,7 @@
   "dependencies": {
     "bluebird": "^2.9.32",
     "lodash": "^3.10.0",
+    "semver": "^5.0.1",
     "xregexp": "^2.0.0"
   }
 }

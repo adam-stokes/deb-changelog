@@ -21,6 +21,7 @@
 #        '(?<timestamp>.*)$', 'img')
 
 xre = require('xregexp').XRegExp
+semver = require('semver')
 
 class ChangeLog
   constructor: (@blob) ->
@@ -73,9 +74,7 @@ class ChangeLog
     model.debVersion = "#{model.major}.#{model.minor}"
     if model.patchLevel?
       model.debVersion = "#{model.debVersion}.#{model.patchLevel}"
-    model.semVer = false
-    if model.major? and model.minor? and model.patchLevel?
-      model.semVer = true
+    model.semVer = semver.valid(model.debVersion)
     model.body = @parseBody(stanza)
     return model
 

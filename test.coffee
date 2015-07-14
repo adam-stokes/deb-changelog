@@ -67,10 +67,4 @@ svl = new ChangeLog(properChange)
 logs = svl.splitLogs()
 for log in logs
   model = svl.parse(log)
-  console.log model.pkgname
-
-svl = new ChangeLog(nonSemVerChange)
-logs = svl.splitLogs()
-for log in logs
-  model = svl.parse(log)
-  console.log model.pkgname
+  console.log model
