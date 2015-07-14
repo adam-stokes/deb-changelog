@@ -1,6 +1,6 @@
 Promise = require('bluebird')
 _ = require('lodash')
-ChangeLog = Promise.promisifyAll(require('.'))
+ChangeLog = require('.')
 
 properChange = """
 openstack (0.99.18-0ubuntu1~14.04.1~bleed1) trusty; urgency=medium
@@ -66,5 +66,8 @@ macumba (0.6-0ubuntu1) trusty; urgency=medium
 svl = new ChangeLog(properChange)
 logs = svl.splitLogs()
 for log in logs
+  console.log "\n\nInput:"
+  console.log log
+  console.log "Result:"
   model = svl.parse(log)
   console.log model
