@@ -1,25 +1,3 @@
-# mega regex
-#     entryRe = xre(
-#        '^(?<pkgname>\\w+)' +
-#        '\\s' +
-#        '\\(' +
-#        '(?<major>\\d+)' +
-#        '\\.' +
-#        '(?<minor>\\d+)' +
-#        '\\.?' +
-#        '(?<patchLevel>\\d+)?-' +
-#        '(?<versionExtra>\\d+.*)\\)' +
-#        '\\s' +
-#        '(?<series>\\w+);\\surgency=(?<priority>\\w+)' +
-#        '\\*\\s(?<body>.*)\\s+?(?<body2>.*)\\s+?(?<body3>.*)' +
-#        '\\s*--\\s(?<firstname>\\w+)' +
-#        '\\s' +
-#        '(?<lastname>\\w+)' +
-#        '\\s' +
-#        '(?<email><.*>)' +
-#        '\\s+' +
-#        '(?<timestamp>.*)$', 'img')
-
 xre = require('xregexp').XRegExp
 semver = require('semver')
 
