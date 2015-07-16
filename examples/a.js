@@ -1,7 +1,7 @@
 "use strict";
 
 var _ = require("lodash");
-var ChangeLog = require(".");
+var ChangeLog = require("..");
 
 var properChange = "openstack (0.99.18-0ubuntu1~14.04.1~bleed1) trusty; urgency=medium\n\n" +
     "  * Fix nclxd\n\n" +
