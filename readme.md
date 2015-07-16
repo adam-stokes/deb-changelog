@@ -10,7 +10,7 @@ $ npm i --save deb-changelog
 
 ## Usage
 
-```
+```javascript
 var ChangeLog = require(".");
 var properChange = "openstack (0.99.18-0ubuntu1~14.04.1~bleed1) trusty; urgency=medium\n\n" +
     "  * Fix nclxd\n\n" +
