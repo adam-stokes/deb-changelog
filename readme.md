@@ -1,4 +1,4 @@
-# deb-changelog [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]
+# deb-changelog [![NPM version][npm-image]][npm-url]
 
 > Parses a `debian/changelog` file.
 
