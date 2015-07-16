@@ -1,29 +1,22 @@
 {
   "name": "deb-changelog",
-  "version": "1.0.4",
-  "description": "parse debian/changelog",
-  "main": "dist/index.js",
+  "version": "1.0.5",
+  "description": "Parses debian/changelog",
+  "main": "index.js",
   "scripts": {
-    "prepublish": "coffee -o dist -b -c index.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/battlemidget/deb-changelog.git"
-  },
-  "author": "adam stokes",
+  "repository": "battlemidget/deb-changelog",
+  "author": "Adam Stokes",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/battlemidget/deb-changelog/issues"
-  },
-  "homepage": "https://github.com/battlemidget/deb-changelog#readme",
   "dependencies": {
-    "bluebird": "^2.9.32",
-    "lodash": "^3.10.0",
-    "semver": "^5.0.1",
+    "debug": "^2.2.0",
     "xregexp": "^2.0.0"
   },
+  "keywords": [
+    "debian"
+  ],
   "devDependencies": {
-    "coffee-script": "^1.9.3"
+    "lodash": "^3.10.0"
   }
 }
