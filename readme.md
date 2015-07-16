@@ -58,4 +58,7 @@ Result:
 
 ## License
 
-MIT
+[MIT License](http://en.wikipedia.org/wiki/MIT_License)
+
+[npm-url]: https://www.npmjs.com/package/deb-changelog
+[npm-image]: http://img.shields.io/npm/v/deb-changelog.svg
