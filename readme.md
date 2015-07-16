@@ -1,4 +1,4 @@
-# deb-changelog [![NPM version][npm-image]][npm-url]
+# deb-changelog [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image][travis-url]
 
 > Parses a `debian/changelog` file.
 
@@ -60,5 +60,8 @@ Result:
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
+[downloads-image]: http://img.shields.io/npm/dm/deb-changelog.svg
 [npm-url]: https://www.npmjs.com/package/deb-changelog
 [npm-image]: http://img.shields.io/npm/v/deb-changelog.svg
+[travis-image]: https://travis-ci.org/battlemidget/deb-changelog.svg?branch=master
+[travis-url]: https://travis-ci.org/battlemidget/deb-changelog
