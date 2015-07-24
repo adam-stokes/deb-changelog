@@ -1,5 +1,6 @@
 "use strict";
 
+var Promise = require("native-or-bluebird");
 var xre = require("xregexp").XRegExp;
 var debug = require("debug")("deb-changelog");
 
@@ -14,38 +15,40 @@ ChangeLog.prototype.parseBody = function(stanza) {
         debug(i);
         return matches.push(match.body.trim());
     });
-    return matches;
+    return Promise.all(matches);
 };
 
-ChangeLog.prototype.splitLogs = function() {
+ChangeLog.prototype.chunk = function() {
     var bodyRe = xre("[-\+]\\d{4}", "mg");
     var matches = [];
     var currentIdx = 0;
     xre.forEach(this.blob, bodyRe, function(match, i) {
-        debug(i);
-        var endIdx = match.index + 4;
-        matches.push(match.input.slice(currentIdx, +endIdx + 1 || 9e9).trim());
+        debug("iter: %s", i);
+        var endIdx = match.index + 6;
+        matches.push(match.input.slice(currentIdx, endIdx).trim());
         currentIdx = endIdx + 1;
     });
-    return matches;
+    debug(matches);
+    return Promise.all(matches);
 };
 
 ChangeLog.prototype.parse = function(stanza) {
     var entryRe = xre("^(?<pkgname>\\w+)" +
-                  "\\s" +
-                  "\\(" +
-                  "(?<version>\\d+\\.\\d+\\.*\\d*-\\d+)" +
-                  "(?<versionExtra>.*)\\)" +
-                  "\\s" +
-                  "(?<series>\\w+);\\surgency=(?<priority>\\w+)" +
-                  "\\s[^]*" +
-                  "--\\s(?<firstname>\\w+)" +
-                  "\\s" +
-                  "(?<lastname>\\w+)" +
-                  "\\s" +
-                  "(?<email><.*>)" +
-                  "\\s+" +
-                  "(?<timestamp>.*)", "img");
+                      "\\s" +
+                      "\\(" +
+                      "(?<version>[0-9\\-\\.\\+]+)" +
+                      "(?<versionExtra>[\\w\\d\\~\\-\\.\\+]+)" +
+                      "\\)" +
+                      "\\s" +
+                      "(?<series>\\w+);\\surgency=(?<priority>\\w+)" +
+                      "\\s[^]*" +
+                      "--\\s(?<firstname>\\w+)" +
+                      "\\s" +
+                      "(?<lastname>\\w+)" +
+                      "\\s" +
+                      "(?<email><.*>)" +
+                      "\\s+" +
+                      "(?<timestamp>.*)", "img");
     var match = xre.exec(stanza, entryRe);
     var model = {
         pkgname: match.pkgname,
@@ -58,8 +61,11 @@ ChangeLog.prototype.parse = function(stanza) {
         email: match.email,
         timestamp: match.timestamp
     };
-    model.body = this.parseBody(stanza);
-    return model;
+    this.parseBody(stanza)
+        .then(function(res){
+            model.body = res;
+        });
+    return Promise.resolve(model);
 };
 
 module.exports = ChangeLog;

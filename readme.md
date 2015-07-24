@@ -1,6 +1,6 @@
 # deb-changelog [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
-> Parses a `debian/changelog` file.
+> Promises based library for parsing a `debian/changelog` file.
 
 ## Install
 
@@ -10,8 +10,15 @@ $ npm i --save deb-changelog
 
 ## Usage
 
-```javascript
-var ChangeLog = require(".");
+Use it like normal with thenables routine or a step further via `co`.
+
+```js
+"use strict";
+
+var _ = require("lodash");
+var ChangeLog = require("..");
+var co = require("co");
+
 var properChange = "openstack (0.99.18-0ubuntu1~14.04.1~bleed1) trusty; urgency=medium\n\n" +
     "  * Fix nclxd\n\n" +
     " -- Adam Stokes <adam.stokes@ubuntu.com>  Thu, 25 Jun 2015 10:25:15 -0400\n\n" +
@@ -20,26 +27,19 @@ var properChange = "openstack (0.99.18-0ubuntu1~14.04.1~bleed1) trusty; urgency=
     "  * Upgrade juju compat\n\n" +
     " -- Adam Stokes <adam.stokes@ubuntu.com>  Fri, 19 Jun 2015 17:01:14 -0400";
 
-var svl = new ChangeLog(properChange);
-var logs = svl.splitLogs();
-var log = _.first(logs);
-console.log("\n\nInput:");
-console.log(log);
-console.log("Result:");
-var model = svl.parse(log);
-console.log(model);
+co(function*(){
+    var svl = new ChangeLog(properChange);
+    var chunks = yield svl.chunk();
+    var parsed = yield svl.parse(_.first(chunks));
+    console.log(parsed);
+}).catch(function(err){
+    throw Error(err);
+});
 ```
 
 ## Result
 
 ```
-Input:
-openstack (0.99.18-0ubuntu1~14.04.1~bleed1) trusty; urgency=medium
-
-  * Fix nclxd
-
- -- Adam Stokes <adam.stokes@ubuntu.com>  Thu, 25 Jun 2015 10:25:15 -0400
-Result:
 { pkgname: 'openstack',
   version: '0.99.18-0',
   versionExtra: 'ubuntu1~14.04.1~bleed1',

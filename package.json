@@ -11,12 +11,14 @@
   "license": "MIT",
   "dependencies": {
     "debug": "^2.2.0",
+    "native-or-bluebird": "^1.2.0",
     "xregexp": "^2.0.0"
   },
   "keywords": [
     "debian"
   ],
   "devDependencies": {
+    "co": "^4.6.0",
     "lodash": "^3.10.0",
     "mocha": "^2.2.5",
     "should": "^7.0.2"
