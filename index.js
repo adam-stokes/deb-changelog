@@ -1,6 +1,5 @@
 "use strict";
 
-var Promise = require("native-or-bluebird");
 var xre = require("xregexp").XRegExp;
 var debug = require("debug")("deb-changelog");
 
