@@ -1,6 +1,6 @@
 "use strict";
 
-var xre = require("xregexp").XRegExp;
+var xre = require("xregexp");
 var debug = require("debug")("deb-changelog");
 
 function ChangeLog(blob) {

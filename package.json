@@ -1,10 +1,10 @@
 {
   "name": "deb-changelog",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Parses debian/changelog",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "mocha"
   },
   "repository": "battlemidget/deb-changelog",
   "author": "Adam Stokes",
